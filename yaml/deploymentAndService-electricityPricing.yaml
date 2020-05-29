@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: electricitypricing
+  namespace: "proj-gr4"
+  labels:
+    app: electricitypricing
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: electricitypricing
+  template:
+    metadata:
+      labels:
+        app: electricitypricing
+    spec:
+      containers:
+      - name: electricitypricing
+        image: jones109/electricitypricing:latest
+---
+apiVersion: v1
+kind: Service
+metadata: 
+  name: electricitypricing
+  namespace: "proj-gr4"
+spec:
+  selector:
+    app: electricitypricing
+  ports:
+    - port: 8080
+      targetPort: 80
+  type: LoadBalancer
+    
+      
+      
