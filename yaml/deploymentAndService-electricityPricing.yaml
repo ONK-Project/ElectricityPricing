@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: electricitypricing
-        image: jones109/electricitypricing:latest
+        image: 201608930/electricitypricing:latest
 ---
 apiVersion: v1
 kind: Service

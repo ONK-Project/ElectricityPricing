@@ -36,9 +36,14 @@ namespace ElectricityPricing.Services
 
         private string CreateGetUrl(DateTime dateTime)
         {
-            var getUrl = BaseUrl + "? datetime = [DateTime]";
-            getUrl = getUrl.Replace("[DateTime]", dateTime.ToString());
+            var getUrl = BaseUrl + "?datetime=[DateTime]";
 
+            var settings = new JsonSerializerSettings { DateFormatString = "yyyy-MM-ddTHH:mm:ss.fffZ" };
+            var dateTimeString = JsonConvert.SerializeObject(dateTime, settings);
+            dateTimeString = dateTimeString.Trim(new char[] { '/', '"' });
+            getUrl = getUrl.Replace("[DateTime]", dateTimeString);
+
+            Console.WriteLine("Calling public charging on " + getUrl);
             return getUrl;
         }
     }
